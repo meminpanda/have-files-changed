@@ -17,8 +17,10 @@ async = require 'async'
 watchedGlobs = {}
 
 module.exports = haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChangeCallback}) ->
+
   # get a list of files
   glob filesGlob, {} , (er, files) ->
+
     # Function to grab the stats for each file in the list.
     # returns a string (eventually a hash?) of the filename and
     # its mtime formatted in milliseconds since epoch
@@ -29,13 +31,13 @@ module.exports = haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChange
 
     # Map the list of files to a list of strings
     async.map files,createStatMap, (err,results) ->
+
       # Then, take the list of strings and reduce them down
       # to one large string.
       hashOfAllFiles = results.reduce (prevValue, currentValue) ->
         prevValue+currentValue
       , ""
 
-      console.log hashOfAllFiles, watchedGlobs[filesGlob]
       if watchedGlobs[filesGlob] == hashOfAllFiles
         noChangeCallback()
       else
