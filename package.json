@@ -2,7 +2,7 @@
   "author": "Sean McCullough <mcculloughsean@gmail.com>"
  ,"name": "have-fles-changed"
  ,"description": "Check if the mtime on a list of files has changed"
- ,"version": "0.0.1"
+ ,"version": "0.0.2-dev"
  ,"homepage": "https://github.com/mcculloughsean/have-files-changed"
  ,"repository": {
     "type": "git"
