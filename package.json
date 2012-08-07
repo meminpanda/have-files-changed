@@ -1,12 +1,12 @@
 {
   "author": "Sean McCullough <mcculloughsean@gmail.com>"
- ,"name": "have_fles_changed"
+ ,"name": "have-fles-changed"
  ,"description": "Check if the mtime on a list of files has changed"
  ,"version": "0.0.1"
- ,"homepage": "https://github.com/mcculloughsean/haveFilesChanged"
+ ,"homepage": "https://github.com/mcculloughsean/have-files-changed"
  ,"repository": {
     "type": "git"
-   ,"url": "git://github.com/mcculloughsean/haveFilesChanged.git"
+   ,"url": "https://github.com/mcculloughsean/have-files-changed.git"
   }
  ,"main": "lib/haveFilesChanged.js"
  ,"scripts": {
@@ -20,7 +20,6 @@
     "coffee-script": "1.3.3"
   }
  ,"license": "MIT"
- ,"optionalDependencies": {}
  ,"engines": {
     "node": "*"
   }
