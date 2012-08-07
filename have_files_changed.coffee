@@ -10,43 +10,44 @@
 #     haveFilesChanged 'sass/*.sass',
 #       yes: filesHaveChangedCallback
 #       no: filesHaveNotChangedCallback
+#       error: (err) -> throw err
 #
 # The first time you call `haveFilesChanged`, the yes callback will be fired.
 #
 
-fs    = require 'fs'
-glob  = require 'glob'
-async = require 'async'
+fs     = require 'fs'
+crypto = require 'crypto'
+glob   = require 'glob'
+async  = require 'async'
 
-watchedGlobs = {}
+globHashses = {}
 
-module.exports = haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChangeCallback}) ->
+module.exports =
+haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChangeCallback, error:errorCallback}) ->
 
-  # get a list of files
-  glob filesGlob, {} , (er, files) ->
-
-    # Function to grab the stats for each file in the list.
-    # returns a string (eventually a hash?) of the filename and
-    # its mtime formatted in milliseconds since epoch
-    createStatMap = (file, cb) ->
-      fs.stat file, (err, stats) ->
-        return cb err if err?
-        cb noErr, "#{file} #{stats.mtime.getTime()}"
+  # Get a list of files
+  glob filesGlob, (err, files) ->
+    return errorCallback err if err?
 
     # Map the list of files to a list of strings
-    async.map files, createStatMap, (err, results) ->
+    async.map files, createStatMap, (err, filenamesWithMtimes) ->
+      return errorCallback err if err?
 
-      # Then, take the list of strings and reduce them down
-      # to one large string.
-      hashOfAllFiles = results.reduce (prevValue, currentValue) ->
-        prevValue+currentValue
-      , ""
+      filenamesWithMtimes = filenamesWithMtimes.sort().join '\n'
+      hash = crypto.createHash('sha1').update(filenamesWithMtimes).digest 'hex'
 
-      if watchedGlobs[filesGlob] == hashOfAllFiles
+      if hash is globHashses[filesGlob]
         noChangeCallback()
       else
-        watchedGlobs[filesGlob] = hashOfAllFiles
+        globHashses[filesGlob] = hash
         changeCallback()
+
+# Returns full path concatenated with mtime formatted in milliseconds since
+# epoch. E.g. `/tmp/foo.txt 1344358415000`
+createStatMap = (file, cb) ->
+  fs.stat file, (err, stats) ->
+    return cb err if err?
+    cb noErr, "#{file} #{stats.mtime.getTime()}"
 
 noErr = null
 
