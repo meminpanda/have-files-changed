@@ -1,4 +1,4 @@
-haveFilesChanged
+have_files_changed
 ----------------
 
 Sean McCullough <mcculloughsean@gmail.com>
