@@ -16,6 +16,8 @@ async = require 'async'
 
 watchedGlobs = {}
 
+# {yes, no} won't work because they're interpereted as bools :-\
+
 module.exports = haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChangeCallback}) ->
 
   # get a list of files
