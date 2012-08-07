@@ -110,5 +110,6 @@ if process.argv[1] == __filename
 
       # `no` callback was called
       assert yesCallCount is 2 and noCallCount is 2
+      console.log 'ok'
 
   ]
