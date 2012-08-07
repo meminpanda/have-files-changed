@@ -78,10 +78,10 @@ if process.argv[1] == __filename
         no:  -> noCallCount++  ; cb()
 
     (cb) ->
-      setTimeout () ->
-        # nothing changed so `no` is called
-        assert yesCallCount is 1 and noCallCount is 1
+      # nothing changed so `no` is called
+      assert yesCallCount is 1 and noCallCount is 1
 
+      setTimeout () ->
         # let's change something!
         touch '/tmp/foo.txt'
 
