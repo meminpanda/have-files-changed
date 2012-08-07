@@ -1,22 +1,24 @@
 # haveFilesChanged
 #
-# This module will check if the mtime on a list of files and, when called, a 'yes' callback
-# if the files have changed since they were last checked, or a 'no' callback if they are the
-# same. The list of files is specified as a glob pattern (see https://github.com/isaacs/node-glob).
+# This module will check if the mtime on a list of files and, when called, a
+# 'yes' callback if the files have changed since they were last checked, or a
+# 'no' callback if they are the same. The list of files is specified as a glob
+# pattern (see https://github.com/isaacs/node-glob).
 #
-# For example,
-#    `haveFilesChanged 'sass/*.sass', { yes: filesHaveChangedCallback, no: filesHaveNotChangedCallback } `
+# For example
+#
+#     haveFilesChanged 'sass/*.sass',
+#       yes: filesHaveChangedCallback
+#       no: filesHaveNotChangedCallback
 #
 # The first time you call `haveFilesChanged`, the yes callback will be fired.
 #
 
-fs = require 'fs'
-glob = require 'glob'
+fs    = require 'fs'
+glob  = require 'glob'
 async = require 'async'
 
 watchedGlobs = {}
-
-# {yes, no} won't work because they're interpereted as bools :-\
 
 module.exports = haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChangeCallback}) ->
 
@@ -29,10 +31,10 @@ module.exports = haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChange
     createStatMap = (file, cb) ->
       fs.stat file, (err, stats) ->
         return cb err if err?
-        cb noErr, ""+file + " " + (stats.mtime.getTime())
+        cb noErr, "#{file} #{stats.mtime.getTime()}"
 
     # Map the list of files to a list of strings
-    async.map files,createStatMap, (err,results) ->
+    async.map files, createStatMap, (err, results) ->
 
       # Then, take the list of strings and reduce them down
       # to one large string.
@@ -46,10 +48,9 @@ module.exports = haveFilesChanged = (filesGlob, {yes:changeCallback, no:noChange
         watchedGlobs[filesGlob] = hashOfAllFiles
         changeCallback()
 
-
-
 noErr = null
 
+# Test
 
 if process.argv[1] == __filename
 
@@ -85,16 +86,18 @@ if process.argv[1] == __filename
       # nothing changed so `no` is called
       assert yesCallCount is 1 and noCallCount is 1
 
-      setTimeout () ->
+      # The filesystem only has second accuracy, so wait for 1 second to run
+      # this test
+      setTimeout ->
+
         # let's change something!
         touch '/tmp/foo.txt'
 
         haveFilesChanged '/tmp/*.txt'
           yes: -> yesCallCount++ ; cb()
           no:  -> noCallCount++  ; cb()
-      # The filesystem only has second accuracy, so wait for 1
-      # second to run this test
-      ,  1000
+
+      , 1000
 
     (cb) ->
 
