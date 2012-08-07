@@ -1,3 +1,15 @@
+# haveFilesChanged
+#
+# This module will check if the mtime on a list of files and, when called, a 'yes' callback
+# if the files have changed since they were last checked, or a 'no' callback if they are the
+# same. The list of files is specified as a glob pattern (see https://github.com/isaacs/node-glob).
+#
+# For example,
+#    `haveFilesChanged 'sass/*.sass', { yes: filesHaveChangedCallback, no: filesHaveNotChangedCallback } `
+#
+# The first time you call `haveFilesChanged`, the yes callback will be fired.
+#
+
 fs = require 'fs'
 glob = require 'glob'
 async = require 'async'
@@ -76,10 +88,9 @@ if process.argv[1] == __filename
         haveFilesChanged '/tmp/*.txt'
           yes: -> yesCallCount++ ; cb()
           no:  -> noCallCount++  ; cb()
-        # Strangely enough, the filesystem doesn't have the right
-        # kind of resolution for this test. Artificial delay makes
-        # the tests pass
-      , 600
+      # The filesystem only has second accuracy, so wait for 1
+      # second to run this test
+      ,  1000
 
     (cb) ->
 
