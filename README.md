@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/mcculloughsean/have-files-changed.png)](http://travis-ci.org/mcculloughsean/have-files-changed)
 have-files-changed
 ----------------
 
