@@ -13,8 +13,9 @@
     "test": "make test"
   }
  ,"dependencies": {
-    "glob": "3.1.12"
-   ,"async": "0.1.22"
+    "json-loader": "^0.5.4",
+    "glob": "3.1.12",
+    "async": "0.1.22"
   }
  ,"devDependencies": {
     "coffee-script": "1.3.3"
