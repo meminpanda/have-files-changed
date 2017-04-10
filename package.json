@@ -1,26 +1,84 @@
 {
-  "author": "Sean McCullough <mcculloughsean@gmail.com>"
- ,"name": "have-all-files-changed"
- ,"description": "Check if the mtime on the files in a folder and all subfolders changed"
- ,"version": "0.0.3"
- ,"homepage": "https://github.com/mcculloughsean/have-files-changed"
- ,"repository": {
-    "type": "git"
-   ,"url": "https://github.com/mcculloughsean/have-files-changed.git"
-  }
- ,"main": "lib/haveFilesChanged.js"
- ,"scripts": {
-    "test": "make test"
-  }
- ,"dependencies": {
-    "glob": "3.1.12",
-    "async": "0.1.22"
-  }
- ,"devDependencies": {
+  "_args": [
+    [
+      "have-files-changed",
+      "/Applications/XAMPP/xamppfiles/htdocs/lms"
+    ]
+  ],
+  "_defaultsLoaded": true,
+  "_engineSupported": true,
+  "_from": "have-files-changed@latest",
+  "_id": "have-files-changed@0.0.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/have-files-changed",
+  "_nodeVersion": "v0.6.19",
+  "_npmUser": {
+    "email": "mcculloughsean@gmail.com",
+    "name": "mcculloughsean"
+  },
+  "_npmVersion": "1.1.24",
+  "_phantomChildren": {
+    "lru-cache": "2.7.3",
+    "sigmund": "1.0.1"
+  },
+  "_requested": {
+    "name": "have-files-changed",
+    "raw": "have-files-changed",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/have-files-changed/-/have-files-changed-0.0.3.tgz",
+  "_shasum": "d59621f227f85e5699729c352182cce1fead8c28",
+  "_shrinkwrap": null,
+  "_spec": "have-files-changed",
+  "_where": "/Applications/XAMPP/xamppfiles/htdocs/lms",
+  "author": {
+    "email": "mcculloughsean@gmail.com",
+    "name": "Sean McCullough"
+  },
+  "bugs": {
+    "url": "https://github.com/mcculloughsean/have-files-changed/issues"
+  },
+  "dependencies": {
+    "async": "0.1.22",
+    "glob": "3.1.12"
+  },
+  "description": "Check if the mtime on a list of files has changed",
+  "devDependencies": {
     "coffee-script": "1.3.3"
-  }
- ,"license": "MIT"
- ,"engines": {
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "d59621f227f85e5699729c352182cce1fead8c28",
+    "tarball": "https://registry.npmjs.org/have-files-changed/-/have-files-changed-0.0.3.tgz"
+  },
+  "engines": {
     "node": "*"
-  }
+  },
+  "homepage": "https://github.com/mcculloughsean/have-files-changed",
+  "license": "MIT",
+  "main": "lib/have_files_changed.js",
+  "maintainers": [
+    {
+      "email": "mcculloughsean@gmail.com",
+      "name": "mcculloughsean"
+    }
+  ],
+  "name": "have-files-changed",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mcculloughsean/have-files-changed.git"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "version": "0.0.3"
 }
